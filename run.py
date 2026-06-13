@@ -11,6 +11,10 @@ from app.repositories.user_repository import init_db
 # 3. Inicializa a variável 'app' chamando a função de fábrica (Application Factory)
 app = create_app()
 
-if __name__ == "__main__":
-    init_db()        # Garante que a tabela 'users' exista no SQLite antes de ligar o servidor
-    app.run(debug=True)
+import os
+
+if __name__ == '__main__':
+    # O Render fornece a porta na variável de ambiente PORT, se não achar, usa a 5000
+    port = int(os.environ.get("PORT", 5000))
+    # O host '0.0.0.0' torna o servidor acessível externamente
+    app.run(host='0.0.0.0', port=port, debug=True)
